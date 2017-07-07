@@ -3,16 +3,17 @@
   "version": "1.0.0",
   "description": "isomorphic-react-redux",
   "scripts": {
-    "start": "webpack && node server"
+    "start": "cls && node clean && webpack && node server"
   },
   "author": "robindersingh1986@gmail.com",
   "license": "ISC",
   "dependencies": {
-    "path": "^0.12.7",
+    "async": "^2.5.0",
     "babel-register": "^6.24.1",
     "create-react-class": "^15.6.0",
     "express": "^4.15.3",
-    "async": "^2.5.0",
+    "fs": "0.0.1-security",
+    "path": "^0.12.7",
     "react": "^15.6.1",
     "react-dom": "^15.6.1"
   },

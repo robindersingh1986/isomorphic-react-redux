@@ -11,10 +11,10 @@ module.exports = CreateReactClass({
 			<link rel="stylesheet" href="/style.css" />
 			</head>
 			<body>
-				<div>
+				<div id="container">
 					<p>Loreum Ipsum Dolor Loreum Ipsum Dolor Loreum Ipsum Dolor</p>
 				</div>
-				<script src="./bundle.js" />
+				<script type="javascript" src="/bundle.js" />
 			</body>
 			</html>
 			)

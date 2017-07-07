@@ -4,5 +4,5 @@ var MainComponent = require("./Components/Component.jsx");
 
 
 ReactDOM.render(
-		React.createElement((MainComponent), document)
+		React.createElement((MainComponent), document.getElementById("container"))
 	);
