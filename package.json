@@ -1,0 +1,31 @@
+{
+  "name": "isomorphic-react-redux",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "cls && webpack && node server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "robindersingh1986@gmail.com",
+  "license": "ISC",
+  "devDependencies": {
+    "async": "^2.5.0",
+    "babel": "^6.23.0",
+    "babel-register": "^6.24.1",
+    "express": "^4.15.3",
+    "path": "^0.12.7",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "webpack": "^3.1.0"
+  },
+  "dependencies": {
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-register": "^6.24.1",
+    "create-react-class": "^15.6.0",
+    "express": "^4.15.3",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  }
+}
