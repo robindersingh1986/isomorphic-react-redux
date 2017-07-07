@@ -4,9 +4,9 @@ export default function(){
 					id:1,
 					discountPercentage:15,
 					MaxCapping:500,
-					currency:rs,
+					currency:"rs",
 					validTill:"some date",
-					validOn:["product id 1", product id 2]
+					validOn:["product id 1", "product id 2"]
 				}
 			];
 }

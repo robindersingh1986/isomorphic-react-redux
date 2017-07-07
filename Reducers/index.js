@@ -5,4 +5,6 @@ import couponsReducer from "./coupons";
 const allReducers = combineReducers({
 	users:usersReducer,
 	coupons:couponReducer
-})
+});
+
+export default allReducers;

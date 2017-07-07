@@ -3,14 +3,15 @@ var React = require("react");
 var ReactDOM = require("react-dom");
 var ReactDOMServer = require("react-dom/server");
 var MainComponent = require("../Components/Component.jsx");
+var App = require("../Components/App.jsx");
 var ReactRouter = require("react-router");
 
 
 router.get("*", function(request, response){
-	var props = {title:"Isomorphic Web App"};
+	//var props = {title:"Isomorphic Web App"};
 //ReactDOMServer.renderToString(
 var html = ReactDOMServer.renderToString(
-	 		React.createElement(MainComponent, props)
+	 		React.createElement(App)
 	 	);
 	 response.send(html);
 
