@@ -15361,11 +15361,13 @@ var store = (0, _redux.createStore)(_Reducers2.default); /*var React = require("
                                                          */
 
 
-_reactDom2.default.render(_react2.default.createElement(
-	_reactRedux.Provider,
-	{ store: store },
-	_react2.default.createElement(_App2.default, null)
-), document.getElementById("container"));
+console.log("Client side rendering");
+
+/*ReactDOM.render(
+	<Provider store={store}>
+		<App />
+	</Provider>
+	, document.getElementById("container"));*/
 
 //React.createElement(MainComponent, props), document.getElementById("container")
 
@@ -32954,12 +32956,31 @@ module.exports = (0, _createReactClass2.default)({
 							"Test 2"
 						)
 					)
-				)
+				),
+				_react2.default.createElement("script", { type: "javascript", src: "/bundle.js" })
 			)
 		);
 	}
 });
 
+/*
+module.exports = CreateReactClass({
+	render:function(){
+		return (
+			<html>
+			<body>
+			<div id="container">
+				<ul>
+					<li>Test 1</li>
+					<li>Test 2</li>
+				</ul>
+			</div>
+			</body>
+			</html>
+		)
+	}
+});
+*/
 //export default App;
 
 /***/ }),

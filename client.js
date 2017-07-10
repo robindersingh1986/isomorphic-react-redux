@@ -20,11 +20,13 @@ import App from "./Components/App.jsx";
 
 const store = createStore(allReducers);
 
-ReactDOM.render(
+console.log("Client side rendering");
+
+/*ReactDOM.render(
 	<Provider store={store}>
 		<App />
 	</Provider>
-	, document.getElementById("container"));
+	, document.getElementById("container"));*/
 
 
 //React.createElement(MainComponent, props), document.getElementById("container")	

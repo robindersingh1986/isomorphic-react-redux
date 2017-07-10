@@ -2,8 +2,8 @@ require("babel-register")({
 	presets:["react"]
 });
 
-var express = require("express");
-var app = express();
+import express from "express";
+let app = express();
 app.use(express.static("public"));
 app.use(require("./routes/index.jsx"));
 
@@ -21,7 +21,7 @@ app.get("/", function(request, response){
 	response.send(html);
 });*/
 
-var PORT = 3300;
+const PORT = 3300;
 app.listen(PORT, function(err){
 	if(!err) { console.log("Sever is up"); }
 	else { console.log("Error : ", err); }

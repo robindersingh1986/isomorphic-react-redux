@@ -8,6 +8,7 @@ var ReactRouter = require("react-router");
 
 
 router.get("*", function(request, response){
+	console.log("Server side rendering , route url called : ", request.url);
 	//var props = {title:"Isomorphic Web App"};
 //ReactDOMServer.renderToString(
 var html = ReactDOMServer.renderToString(
