@@ -1,3 +1,5 @@
+//Dumb Component
+
 import React  from "react";
 
 
