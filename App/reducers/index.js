@@ -1,7 +1,10 @@
 import {combineReducers} from "redux";
 import todoReducer from "./todoReducer";
 
-export const allReducers = combineReducers({
+
+console.log("allReducers called");
+
+const allReducers = combineReducers({
 	todo:todoReducer
 });
 

@@ -31757,7 +31757,6 @@ function verifySubselectors(mapStateToProps, mapDispatchToProps, mergeProps, dis
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.allReducers = undefined;
 
 var _redux = __webpack_require__(46);
 
@@ -31767,7 +31766,9 @@ var _todoReducer2 = _interopRequireDefault(_todoReducer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var allReducers = exports.allReducers = (0, _redux.combineReducers)({
+console.log("allReducers called");
+
+var allReducers = (0, _redux.combineReducers)({
 	todo: _todoReducer2.default
 });
 
@@ -31788,12 +31789,13 @@ exports.default = function () {
 	var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 	var action = arguments[1];
 
+	console.log("action.payload in reducer :  ", action.payload);
 	switch (action.type) {
-		case "SELECT_TODO":
+		case "GET_TODOS":
 			return action.payload;
 			break;
 		default:
-			console.log("default called");
+			console.log("default called ", action.payload);
 			break;
 	}
 	return state;
@@ -31839,23 +31841,68 @@ exports.default = _react2.default.createElement(
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var App = function App() {
-	return _react2.default.createElement(
-		"div",
-		null,
-		_react2.default.createElement(
-			"h2",
-			null,
-			"App"
-		)
-	);
-};
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } //Dumb Component
+
+/*import React  from "react";
+
+
+const App = () => (
+		<div>
+			<h2>App</h2>
+		</div>
+	)*/
+
+var App = function (_React$Component) {
+  _inherits(App, _React$Component);
+
+  function App() {
+    _classCallCheck(this, App);
+
+    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+  }
+
+  _createClass(App, [{
+    key: "render",
+
+    /*static propTypes = {
+      children: PropTypes.object
+    };*/
+
+    value: function render() {
+      return _react2.default.createElement(
+        "div",
+        { id: "main-view" },
+        _react2.default.createElement(
+          "h1",
+          null,
+          "Todos"
+        ),
+        _react2.default.createElement("hr", null),
+        this.props.children
+      );
+    }
+  }]);
+
+  return App;
+}(_react2.default.Component);
+
+exports.default = App;
 
 /***/ }),
 /* 304 */
@@ -31886,7 +31933,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } //Smart component
 
 var App = function (_Component) {
 	_inherits(App, _Component);
@@ -31954,7 +32001,7 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.todoAct = undefined;
+exports.todoAct = todoAct;
 
 var _axios = __webpack_require__(306);
 
@@ -31962,14 +32009,33 @@ var _axios2 = _interopRequireDefault(_axios);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var API_URL = 'https://webtask.it.auth0.com/api/run/wt-milomord-gmail_com-0/redux-tutorial-backend?webtask_no_cache=1';
+console.log("Action called");
 
-var todoAct = exports.todoAct = function todoAct(todo) {
+var API_URL = 'https://webtask.it.auth0.com/api/run/wt-milomord-gmail_com-0/redux-tutorial-backend?webtask_no_cache=1';
+//call api here
+var data = [1, 2, 3];
+/*try
+{
+data = request.get(API_URL);
+console.log("data : ", data)
+}
+catch(err){
+	console.log("error : ", err);
+}*/
+
+function todoAct() {
 	return {
-		type: "SELECT_TODO",
-		payload: _axios2.default.get(API_URL)
+		type: 'GET_TODOS',
+		promise: data
 	};
-};
+}
+
+/*export const todoAct = (todo) => {
+	return{
+		type:"SELECT_TODO",
+		payload:data
+	}
+};*/
 
 /***/ }),
 /* 306 */

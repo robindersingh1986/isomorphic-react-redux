@@ -24,6 +24,7 @@ import { createStore,
          applyMiddleware }       from 'redux';
 import path                      from 'path';
 
+import fetchComponentData        from './fetchComponentData';
 import App from "./App/containers/App";
 //const history = createHistory()
 
@@ -63,7 +64,7 @@ app.use( (req, res) => {
   const store = createStore(allReducers, applyMiddleware(logger));
 
   match({ routes, location }, (err, redirectLocation, renderProps) => {
-    console.log(" renderProps : ", renderProps);
+    //console.log(" renderProps : ", renderProps);
     if(err) {
       console.error(err);
       return res.status(500).end('Internal server error');
@@ -73,6 +74,8 @@ app.use( (req, res) => {
       return res.status(404).end('Not found');
 
     function renderView() {
+      console.log("renderView called");
+      
       const InitialView = (
         <Provider store={store}>
           <RouterContext {...renderProps} />
@@ -85,7 +88,6 @@ app.use( (req, res) => {
 
       const HTML = `
       <!DOCTYPE html>
-      <html>
         <head>
           <meta charset="utf-8">
           <title>Redux Demo</title>
@@ -103,6 +105,11 @@ app.use( (req, res) => {
 
       return HTML;
     }
+     fetchComponentData(store.dispatch, renderProps.components, renderProps.params)
+      .then(renderView)
+      .then(html => res.end(html))
+      .catch(err => res.end(err.message));
+
   });
 });
 
