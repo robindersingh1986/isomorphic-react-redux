@@ -1,32 +1,27 @@
-/*var React = require("react");
-var ReactDOM = require("react-dom");
-var MainComponent = require("./Components/Component.jsx");
+import React                from 'react';
+import { render }           from 'react-dom';
+import { Router }           from 'react-router';
+import createBrowserHistory from 'history/createBrowserHistory'
+import { Provider }         from 'react-redux';
+import allReducers        from './App/reducers';
+import routes               from './routes/index.jsx';
+/*import promiseMiddleware    from './lib/promiseMiddleware'; */
+//import immutifyState        from './lib/immutifyState';
+import { createStore,
+         combineReducers,
+         applyMiddleware }  from 'redux';
 
-var props = window.PROPS;
+//const initialState = immutifyState(window.__INITIAL_STATE__);
 
-ReactDOM.render(
-		React.createElement(MainComponent, props), document.getElementById("container")	
-	);
-*/
-import "babel-polyfill";
-import React from "react";
-import ReactDOM from "react-dom";
-import {Provider} from "react-redux";
-import {createStore} from "redux";
-import allReducers from "./Reducers"
-import App from "./Components/App.jsx";
+const history = createBrowserHistory();
 
-//var MainComponent = require("./Components/Component.jsx");
+//const reducer = combineReducers(reducers);
+//const store   = applyMiddleware(promiseMiddleware)(createStore)(reducer, initialState);
+const store = createStore(allReducers, applyMiddleware(logger));
 
-const store = createStore(allReducers);
-
-console.log("Client side rendering");
-
-/*ReactDOM.render(
-	<Provider store={store}>
-		<App />
-	</Provider>
-	, document.getElementById("container"));*/
-
-
-//React.createElement(MainComponent, props), document.getElementById("container")	
+render(
+  <Provider store={store}>
+    <Router children={routes} history={history} />
+  </Provider>,
+  document.getElementById('react-view')
+);
