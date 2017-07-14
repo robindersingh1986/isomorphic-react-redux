@@ -1,4 +1,4 @@
-export default (state=null, action) => {
+export default (state={}, action) => {
 	console.log("action.payload in reducer :  ", action.payload);
 	switch(action.type)
 	{
@@ -7,6 +7,8 @@ export default (state=null, action) => {
 		break;
 		default:
 			console.log("default called ", action.payload);
+			return [1,2,3];
+			
 		break;
 	}
 	return state;

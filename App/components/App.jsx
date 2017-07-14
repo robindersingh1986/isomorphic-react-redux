@@ -1,17 +1,7 @@
 //Dumb Component
 
-/*import React  from "react";
-
-
-const App = () => (
-		<div>
-			<h2>App</h2>
-		</div>
-	)*/
-
-
-
 import React, { PropTypes } from 'react';
+import { Route, IndexRoute, Link } from 'react-router'
 
 export default class App extends React.Component {
   /*static propTypes = {
@@ -21,11 +11,23 @@ export default class App extends React.Component {
   render() {
     return (
       <div id="main-view">
+      <header> 
+          Links:
+          {' '}
+          <Link to="/">Home</Link>
+          {' '}
+          <Link to="/foo">Foo</Link>
+          {' '}
+          <Link to="/bar">Bar</Link>
+      </header>
+      <div id="mainContent">
         <h1>Todos</h1>
 
         <hr />
 
         {this.props.children}
+        </div>
+        <footer>This is footer</footer>
       </div>
     );
   }

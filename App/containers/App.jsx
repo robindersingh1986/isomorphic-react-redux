@@ -7,19 +7,11 @@ import {todoAct} from "../actions/todoAction";
 
 
 class App extends Component {
-	showData() {
-		this.props.todo.map((item) => {
-				return (
-						<li key={item}>{item}</li>
-					)
-			})
-	}
+	
 	render() {
 				return (
 						<ul>
-							{this.showData()}
-							<li>one</li>
-							<li>two</li>
+	
 						</ul>
 						);
 		}

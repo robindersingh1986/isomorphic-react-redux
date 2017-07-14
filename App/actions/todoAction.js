@@ -18,7 +18,7 @@ catch(err){
 export function todoAct() {
   return {
     type:    'GET_TODOS',
-    promise: data
+    payload: data
   }
 }
 
