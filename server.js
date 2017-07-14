@@ -2,32 +2,22 @@ require("babel-register")({
 	presets:["react"]
 });
 
-/*import express from "express";
-import React from "react";  
-import Router from "react-router"; 
-import { Route } from "react-router";  
-
-*/
-
 import express                   from 'express';
 import React                     from 'react';
 import { renderToString }        from 'react-dom/server'
-import { RouterContext, match } from 'react-router';
-//import createHistory          from 'history/createBrowserHistory';
 import routes                    from './routes/index.jsx';
-
 import { Provider }              from 'react-redux';
-import allReducers             from './App/reducers/';
-
+import { RouterContext, match, Router, Route, browserHistory, createMemoryHistory } from 'react-router'
+import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
+ 
 import { createStore,
          combineReducers,
          applyMiddleware }       from 'redux';
 import path                      from 'path';
-
 import fetchComponentData        from './fetchComponentData';
+import promiseMiddleware        from './promiseMiddleware';
 import App from "./App/containers/App";
-//const history = createHistory()
-
+import { configureStore } from './App/store'
 
 const app = express();
 app.use(express.static("public"));
@@ -39,31 +29,41 @@ app.listen(PORT, function(err){
 });
 
 
-function logger({ getState }) {
-  return next => action => {
-    console.log('will dispatch', action)
+// function logger({ getState }) {
+//   return next => action => {
+//     console.log('will dispatch', action)
 
-    // Call the next dispatch method in the middleware chain.
-    let returnValue = next(action)
+//     // Call the next dispatch method in the middleware chain.
+//     let returnValue = next(action)
 
-    console.log('state after dispatch', getState())
+//     console.log('state after dispatch', getState())
 
-    // This will likely be the action itself, unless
-    // a middleware further in chain changed it.
-    return returnValue
-  }
-}
+//     // This will likely be the action itself, unless
+//     // a middleware further in chain changed it.
+//     return returnValue
+//   }
+// }
 
 
 
 app.use( (req, res) => {
   //const location = createLocation(req.url);
-  const location = req.url; //history.getCurrentLocation()
+  ////const location = req.url; //history.getCurrentLocation()
   //  const reducer  = combineReducers(reducers);
-  //  const store    = applyMiddleware(promiseMiddleware)(createStore)(reducers);
-  const store = createStore(allReducers, applyMiddleware(logger));
+  ////const store    = applyMiddleware(promiseMiddleware)(createStore)(allReducers);
+  //const store = createStore(allReducers, applyMiddleware(logger));
+//const store = createStore(allReducers);
 
-  match({ routes, location }, (err, redirectLocation, renderProps) => {
+////const history = syncHistoryWithStore(browserHistory, store)
+
+
+  const memoryHistory = createMemoryHistory(req.url)
+  const store = configureStore(memoryHistory)
+  const history = syncHistoryWithStore(memoryHistory, store)
+
+
+
+  match({ history, routes, location: req.url }, (err, redirectLocation, renderProps) => {
     //console.log(" renderProps : ", renderProps);
     if(err) {
       console.error(err);
@@ -78,7 +78,7 @@ app.use( (req, res) => {
       
       const InitialView = (
         <Provider store={store}>
-          <RouterContext {...renderProps} />
+          <RouterContext {...renderProps}/>
         </Provider>
       );
 
